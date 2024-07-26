@@ -2,7 +2,7 @@ import { BrowserRouter, Routes , Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Signup } from './pages/Signup';
 import { Signin } from './pages/Signin';
-
+import { Test } from './pages/Test';
 function App() {
 
   return <>
