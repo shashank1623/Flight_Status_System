@@ -15,6 +15,7 @@ db = client['Indigo_flight_status_db']
 users_collection = db['users']
 flights_collection = db['flights']
 notifications_collection = db['notifications']
+user_flight_data = db['user_flight_data']
 
 def create_user(data):
     users_collection.insert_one(data)
@@ -33,3 +34,6 @@ def get_flight_by_number(flight_number):
 
 def log_notification(data):
     notifications_collection.insert_one(data)
+
+def create_user_flight_data(data):
+    user_flight_data.insert_one(data)
