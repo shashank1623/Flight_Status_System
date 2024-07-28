@@ -64,6 +64,40 @@ def signin():
     token = encode_auth_token(str(user['_id']))
     return jsonify({'token': token}), 200
 
+def token_required(f):
+    @wraps(f)
+    def _verify(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return jsonify({'message': 'Token is missing!'}), 401
+        try:
+            token = auth_header.split(" ")[1]
+            user_id = decode_auth_token(token)
+            print("Decoded user_id:", user_id)
+            if isinstance(user_id, str):
+                g.user_id = user_id
+            else:
+                print("Error message:", user_id)
+                return jsonify({'message': user_id}), 401
+        except Exception as e:
+            print("Exception:", str(e))
+            return jsonify({'message': 'Token is invalid!'}), 401
+        return f(*args, **kwargs)
+    return _verify
+
+@app.route('/flights', methods=['GET'])
+@token_required
+def get_flights():
+    flights = get_all_flights()
+    #print
+    flights = [convert_to_serializable(flight) for flight in flights]
+    return jsonify(flights), 200
+
+@app.route('/flights/<flight_number>', methods=['GET'])
+@token_required
+def get_flight(flight_number):
+    flight = get_flight_by_number(flight_number)
+    return jsonify(convert_to_serializable(flight)) if flight else ('Not Found', 404)
 
 
 if __name__ == '__main__':
