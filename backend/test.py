@@ -23,67 +23,115 @@ users = [
 """
 flights = [
     {
-        "flightNumber": "SA201",
+        "airline": "American Airlines",
+        "arrivalTime": "2024-07-27T13:00:00Z",
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "AA101",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival"
+    },
+    {
         "airline": "SingaPore Airlines",
-        "source": "HKG",
+        "arrivalTime": "2024-07-27T13:00:00Z",
+        "departureTime": "2024-07-27T10:00:00Z",
         "destination": "JFK",
-        "departureTime": "2024-07-27T10:00:00Z",
-        "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "flightNumber": "SA201",
+        "source": "HKG",
+        "status": "On Time",
+        "flightType": "Arrival"
     },
     {
-        "flightNumber": "UA201",
         "airline": "United Airlines",
-        "source": "JFK",
-        "destination": "LAX",
-        "departureTime": "2024-07-27T10:00:00Z",
         "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "UA201",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival"
     },
     {
-        "flightNumber": "DL201",
+        
         "airline": "Delta Airlines",
-        "source": "JFK",
-        "destination": "LAX",
-        "departureTime": "2024-07-27T10:00:00Z",
         "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "DL201",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival" 
     },
     {
-        "flightNumber": "BA201",
         "airline": "British Airways",
-        "source": "JFK",
-        "destination": "LAX",
-        "departureTime": "2024-07-27T10:00:00Z",
         "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "BA201",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival"
     },
     {
-        "flightNumber": "AF201",
         "airline": "Air France",
-        "source": "JFK",
-        "destination": "LAX",
-        "departureTime": "2024-07-27T10:00:00Z",
         "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "AF201",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival"
     },
     {
-        "flightNumber": "EK201",
         "airline": "Emirates",
-        "source": "JFK",
-        "destination": "LAX",
-        "departureTime": "2024-07-27T10:00:00Z",
         "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "EK201",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival" 
     },
     {
-        "flightNumber": "TK201",
         "airline": "Turkish Airlines",
-        "source": "JFK",
-        "destination": "LAX",
-        "departureTime": "2024-07-27T10:00:00Z",
         "arrivalTime": "2024-07-27T13:00:00Z",
-        "status": "On Time"
+        "departureTime": "2024-07-27T10:00:00Z",
+        "destination": "LAX",
+        "flightNumber": "TK201",
+        "source": "JFK",
+        "status": "On Time",
+        "flightType": "Arrival"
+    },
+    {
+        "airline": "Air India",
+        "departureTime": "2024-08-01T10:30:00Z",
+        "destination": "JFK",
+        "flightNumber": "AB123",
+        "gateNumber": "B12",
+        "source": "SFO",
+        "status": "On Time",
+        "flightType": "Departure"
+    },
+    {
+        "airline": "Ethiad Airways",
+        "departureTime": "2024-08-01T14:00:00Z",
+        "destination": "ORD",
+        "flightNumber": "CD456",
+        "gateNumber": "C8",
+        "source": "LAX",
+        "status": "Delayed",
+        "flightType": "Departure"
+    },
+    {
+        "airline": "Emirats Airline",
+        "departureTime": "2024-08-01T16:45:00Z",
+        "destination": "DFW",
+        "flightNumber": "EF789",
+        "gateNumber": "D5",
+        "source": "SEA",
+        "status": "On Time",
+        "flightType": "Departure"
     }
 ]
 """
@@ -95,6 +143,9 @@ notifications = [
     }
 ]
 """
+
+
+
 async def populate_db():
     #db['users'].insert_many(users)
     db['flights'].insert_many(flights)
