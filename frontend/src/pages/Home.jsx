@@ -35,10 +35,10 @@ export const Home = () => {
       </header>
       <div className="flex flex-col lg:flex-row gap-6">
       <div className="w-full lg:w-1/3">
-          <FlightList title="Upcoming Flights" flights={upcomingFlights} />
+          <FlightList title="Arrivals" flights={upcomingFlights} />
         </div>
         <div className="w-full lg:w-1/3">
-          <FlightList title="Outgoing Flights" flights={outgoingFlights} />
+          <FlightList title="Departure" flights={outgoingFlights} />
         </div>
         <div className="w-full lg:w-1/3">
           <SearchForm />
