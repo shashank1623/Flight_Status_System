@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState , useContext } from 'react';
 import { FaSearch, FaUserCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 export const Appbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const navigate = useNavigate();
+  const {logout} = useContext(AuthContext);
 
   const toggleDropdown = () => setDropdownOpen(prev => !prev);
 
@@ -16,6 +20,11 @@ export const Appbar = () => {
   };
 
   const toggleSearchInput = () => setShowSearchInput(prev => !prev);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/signin');
+  }
 
   const userName = "John Doe";
   const userInitial = userName.charAt(0);
@@ -76,7 +85,7 @@ export const Appbar = () => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg py-2 z-20">
               <a href="/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</a>
-              <a href="/logout" className="block px-4 py-2 hover:bg-gray-100">Sign Out</a>
+              <a onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-100">Sign Out</a>
             </div>
           )}
         </div>
