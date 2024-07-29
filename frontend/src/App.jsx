@@ -2,17 +2,22 @@ import { BrowserRouter, Routes , Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Signup } from './pages/Signup';
 import { Signin } from './pages/Signin';
+import { AuthProvider } from './context/AuthContext';
+import {PrivateRoute} from './components/PrivateRoute';
+
 function App() {
 
   return <>
-      <BrowserRouter>
+  <AuthProvider>
+    <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<PrivateRoute> <Home/></PrivateRoute>} />
           <Route path='/signup' element={<Signup/>} />
           <Route path='/signin' element={<Signin/>} />
         </Routes>
 
-      </BrowserRouter>
+    </BrowserRouter>
+  </AuthProvider>
   </>
 }
 
