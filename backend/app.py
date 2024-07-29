@@ -105,8 +105,9 @@ def get_flight(flight_number):
     flight = get_flight_by_number(flight_number)
     return jsonify(convert_to_serializable(flight)) if flight else ('Not Found', 404)
 
-def send_sms_notification(flight_data, user_contact):
+def send_sms_notification(flight_data, user_contact , user_name):
     message_body = (
+        f"Dear {user_name} , Your Flight Details are as follows:\n"
         f"Flight Number: {flight_data['flightNumber']}\n"
         f"Airline: {flight_data['airline']}\n"
         f"Source: {flight_data['source']}\n"
@@ -157,7 +158,7 @@ def search_flight():
 
 
     # Send Notification
-    sms_sid = send_sms_notification(flight, data['contact'])
+    sms_sid = send_sms_notification(flight, data['contact'],data['name'])
     if not sms_sid:
         return jsonify({'message': 'Flight data stored successfully, but failed to send notification'}), 500
 
