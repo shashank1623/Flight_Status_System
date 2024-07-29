@@ -1,22 +1,23 @@
-import { useState , useContext } from 'react';
+import { useState, useContext } from 'react';
 import { FaSearch, FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
-export const Appbar = () => {
+export const Appbar = ({ fetchFlightDetails }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchInput, setShowSearchInput] = useState(false);
   const navigate = useNavigate();
-  const {logout} = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   const toggleDropdown = () => setDropdownOpen(prev => !prev);
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
     console.log("Searching for:", searchQuery);
+    await fetchFlightDetails(searchQuery);
   };
 
   const toggleSearchInput = () => setShowSearchInput(prev => !prev);
@@ -24,7 +25,7 @@ export const Appbar = () => {
   const handleLogout = () => {
     logout();
     navigate('/signin');
-  }
+  };
 
   const userName = "John Doe";
   const userInitial = userName.charAt(0);
@@ -83,9 +84,23 @@ export const Appbar = () => {
             onClick={toggleDropdown}
           />
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg py-2 z-20">
-              <a href="/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</a>
-              <a onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-100">Sign Out</a>
+            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+              <div className="p-4 border-b border-gray-200">
+                <div className="font-bold">{userName}</div>
+                <div className="text-gray-600 text-sm">john.doe@example.com</div>
+              </div>
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() => navigate("/profile")}
+              >
+                Profile
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </div>
           )}
         </div>
@@ -93,5 +108,3 @@ export const Appbar = () => {
     </header>
   );
 };
-
-export default Appbar;
