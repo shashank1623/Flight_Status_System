@@ -16,8 +16,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (newToken) => {
-        const BearerToken = `Bearer ${newToken}`;
-        localStorage.setItem('token', BearerToken);
+        localStorage.setItem('token', newToken);
         setToken(newToken);
         setIsAuthenticated(true);
     };
