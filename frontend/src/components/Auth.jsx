@@ -24,7 +24,8 @@ export const Auth = ({ type }) => {
       const response = await axios.post(url, postInputs);
       if (response.status === 201 || response.status === 200) {
         const token = response.data.jwt || response.data.token;
-        login(token);
+        const BearerToken = `Bearer ${token}`;
+        login(BearerToken);
         navigate("/");
       }
     } catch (error) {
