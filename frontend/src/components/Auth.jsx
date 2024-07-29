@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { Spinner } from "./Spinner";
+import logo from '../assets/IndiGo_logo_2x.png';
 
 export const Auth = ({ type }) => {
   const { login } = useContext(AuthContext);
@@ -39,73 +40,78 @@ export const Auth = ({ type }) => {
   };
 
   return (
-    <div className="h-screen flex justify-center flex-col">
-      <div className="flex justify-center">
-        <div>
-          <div className="px-10">
-            <div className="text-3xl font-extrabold">
-              {type === "signup"
-                ? "Create an account"
-                : "Sign in to your account"}
+    <>
+      <div className="h-screen flex justify-center items-center relative">
+        <div className="absolute top-4 left-4">
+          <img src={logo} alt="IndiGo Logo" className="w-32" />
+        </div>
+        <div className="flex justify-center">
+          <div>
+            <div className="px-10">
+              <div className="text-3xl font-extrabold">
+                {type === "signup"
+                  ? "Create an account"
+                  : "Sign in to your account"}
+              </div>
+              <div className="text-slate-500">
+                {type === "signin"
+                  ? "Don't have an account?"
+                  : "Already have an account?"}
+                <Link
+                  className="pl-2 underline"
+                  to={type === "signin" ? "/signup" : "/signin"}
+                >
+                  {type === "signin" ? "Sign up" : "Sign in"}
+                </Link>
+              </div>
             </div>
-            <div className="text-slate-500">
-              {type === "signin"
-                ? "Don't have an account?"
-                : "Already have an account?"}
-              <Link
-                className="pl-2 underline"
-                to={type === "signin" ? "/signup" : "/signin"}
-              >
-                {type === "signin" ? "Sign up" : "Sign in"}
-              </Link>
-            </div>
-          </div>
-          <div className="pt-8">
-            {type === "signup" && (
+            <div className="pt-8">
+              {type === "signup" && (
+                <LabelledInput
+                  label="Name"
+                  placeholder="John Doe"
+                  onChange={(e) => {
+                    setPostInputs({
+                      ...postInputs,
+                      name: e.target.value,
+                    });
+                  }}
+                />
+              )}
               <LabelledInput
-                label="Name"
-                placeholder="John Doe"
+                label="Email"
+                placeholder="johndoe@gmail.com"
                 onChange={(e) => {
                   setPostInputs({
                     ...postInputs,
-                    name: e.target.value,
+                    email: e.target.value,
                   });
                 }}
               />
-            )}
-            <LabelledInput
-              label="Email"
-              placeholder="johndoe@gmail.com"
-              onChange={(e) => {
-                setPostInputs({
-                  ...postInputs,
-                  email: e.target.value,
-                });
-              }}
-            />
-            <LabelledInput
-              label="Password"
-              type="password"
-              placeholder="123456"
-              onChange={(e) => {
-                setPostInputs({
-                  ...postInputs,
-                  password: e.target.value,
-                });
-              }}
-            />
-            <button
-              onClick={handleAuth}
-              type="button"
-              className="mt-8 w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-              disabled={loading}
-            >
-              {loading ? <Spinner /> : type === "signup" ? "Sign up" : "Sign in"}
-            </button>
+              <LabelledInput
+                label="Password"
+                type="password"
+                placeholder="123456"
+                onChange={(e) => {
+                  setPostInputs({
+                    ...postInputs,
+                    password: e.target.value,
+                  });
+                }}
+              />
+              <button
+                onClick={handleAuth}
+                type="button"
+                className="mt-8 w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                disabled={loading}
+              >
+                {loading ? <Spinner /> : type === "signup" ? "Sign up" : "Sign in"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
