@@ -1,6 +1,8 @@
 import { FlightCard } from "./FlightCard";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-export const FlightList = ({ title, flights }) => {
+export const FlightList = ({ title, flights, loading }) => {
   return (
     <div className="bg-white border border-black rounded-lg p-4 shadow-sm">
       <div className="flex flex-row gap-4">
@@ -41,9 +43,20 @@ export const FlightList = ({ title, flights }) => {
       </div>
 
       <div className="space-y-4">
-        {flights.map((flight) => (
-          <FlightCard key={flight.number} flight={flight} />
-        ))}
+        {loading ? (
+          // Render skeletons while loading
+          Array.from({ length: 5 }).map((_, index) => (
+            <div key={index} className="p-4 border-b">
+              <Skeleton height={20} width={`60%`} />
+              <Skeleton height={20} width={`80%`} />
+              <Skeleton height={20} width={`40%`} />
+            </div>
+          ))
+        ) : (
+          flights.map((flight) => (
+            <FlightCard key={flight._id} flight={flight} />
+          ))
+        )}
       </div>
     </div>
   );
