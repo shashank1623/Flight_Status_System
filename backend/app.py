@@ -106,16 +106,35 @@ def get_flight(flight_number):
     return jsonify(convert_to_serializable(flight)) if flight else ('Not Found', 404)
 
 def send_sms_notification(flight_data, user_contact , user_name):
-    message_body = (
-        f"Dear {user_name} , Your Flight Details are as follows:\n"
-        f"Flight Number: {flight_data['flightNumber']}\n"
-        f"Airline: {flight_data['airline']}\n"
-        f"Source: {flight_data['source']}\n"
-        f"Destination: {flight_data['destination']}\n"
-        f"Departure Time: {flight_data['departureTime']}\n"
-        f"Status: {flight_data['status']}\n"
-        f"Gate Number: {flight_data.get('gateNumber', 'N/A')}"
-    )
+    if flight_data['flightType'] == 'Departure':
+       
+        message_body = (
+            f"Dear {user_name},\n"
+            f"Your Flight Details are as follows:\n"
+            f"Flight Number: {flight_data['flightNumber']}\n"
+            f"Airline: {flight_data['airline']}\n"
+            f"Source: {flight_data['source']}\n"
+            f"Destination: {flight_data['destination']}\n"
+            f"Departure Time: {flight_data['departureTime']}\n"
+            f"Status: {flight_data['status']}\n"
+            f"Gate Number: {flight_data.get('gateNumber', 'N/A')}\n"
+            f"Baggage Carousel: N/A\n"
+        )
+    else:
+        
+        message_body = (
+            f"Dear {user_name},\n"
+            f"Your Flight Details are as follows:\n"
+            f"Flight Number: {flight_data['flightNumber']}\n"
+            f"Airline: {flight_data['airline']}\n"
+            f"Source: {flight_data['source']}\n"
+            f"Destination: {flight_data['destination']}\n"
+            f"Arrival Time: {flight_data['arrivalTime']}\n"
+            f"Status: {flight_data['status']}\n"
+            f"Gate Number: N/A\n"
+            f"Baggage Carousel: {flight_data.get('baggageCarousel', 'N/A')}\n"
+        )
+
     try:
         message = twilio_client.messages.create(
             body=message_body,
@@ -162,19 +181,6 @@ def search_flight():
     if not sms_sid:
         return jsonify({'message': 'Flight data stored successfully, but failed to send notification'}), 500
 
-    # Prepare the response data
-    response_data = {
-        'flightNumber': flight['flightNumber'],
-        'airline': flight['airline'],
-        'source': flight['source'],
-        'destination': flight['destination'],
-        'departureTime': flight['departureTime'],
-        'status': flight['status'],
-        'gateNumber': flight.get('gateNumber', 'N/A')
-    }
     
-    return jsonify({'message': 'Flight data stored successfully and notification sent', 'flightData': response_data}), 201
-
-
-
+    return jsonify({'message': 'Flight data stored successfully and notification sent', 'flightData': convert_to_serializable(flight)}), 201
 
