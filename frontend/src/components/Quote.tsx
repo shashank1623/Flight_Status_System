@@ -2,10 +2,10 @@ import React from 'react';
 
 export const Quote = () => {
     return (
-      <div className="bg-blue-500 h-screen flex justify-center flex-col">
+      <div className="bg-[#000099] h-screen flex justify-center flex-col">
         <div className="flex justify-center">
-          <div className="max-w-lg">
-            <div className="text-3xl font-bold">
+          <div className="max-w-lg text-white">
+            <div className="text-3xl  font-bold">
               "The Customer support I recived was exceptional. The support team
               went above and beyond to adress my concerns."
             </div>
