@@ -177,5 +177,4 @@ def search_flight():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
