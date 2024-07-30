@@ -59,7 +59,7 @@ export const SearchForm = ({setFlightDetails}) => {
           name="departure_airport"
           value={formData.departure_airport}
           onChange={handleChange}
-          placeholder="Enter departure airport"
+          placeholder="Enter Destination ..."
           className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
         <input
@@ -67,7 +67,7 @@ export const SearchForm = ({setFlightDetails}) => {
           name="arrival_airport"
           value={formData.arrival_airport}
           onChange={handleChange}
-          placeholder="Enter arrival airport"
+          placeholder="Enter source ..."
           className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
         <input
