@@ -98,7 +98,7 @@ export const SearchForm = ({setFlightDetails}) => {
           name="contact"
           value={formData.contact}
           onChange={handleChange}
-          placeholder="Enter your mobile or email"
+          placeholder="Enter your mobile number"
           className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
       </div>
